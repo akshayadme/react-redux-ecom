@@ -1,7 +1,13 @@
 import React from "react";
-
+import Navbar from "./components/Navbar";
+import Router from "./Routes";
 function App() {
-  return <div className="App">app</div>;
+  return (
+    <>
+      <Navbar />
+      <Router />
+    </>
+  );
 }
 
 export default App;
