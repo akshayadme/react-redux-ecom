@@ -1,13 +1,182 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;700;900&family=Raleway:wght@100;300;500;700&display=swap');
+
+:root{
+    --bodyBack: #eee;
+    --textColor: #1b2741;
+    --starColor: #f67034;
+    --sectionBack: #f7f6f9;
+    --lightTextColor: #a4a4a4;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+body{
+    background-color: var(--bodyBack);
+    
+}
+.container{
+    margin: 100px 0;
+    /* width: 90vw; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.container .header{
+    width: 100%;
+    /* text-align: center; */
+    margin: 0 150px 30px;
+}
+.container .header h1{
+    font-size: 2em;
+    color: var(--textColor);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container .header h1::after{
+    content:"";
+    position: absolute;
+    border-bottom: 5px solid var(--starColor);
+    width: 50px;
+    margin-top: 40px;
+    margin-left: -200px;
+
+}
+.top-section{
+    margin:  0 150px ;
+    display: flex;
+    justify-content: flex-end;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+.products{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    flex-wrap: wrap;
+    grid: 450px / 300px 300px 300px;
+    gap: 40px;
+    margin-top: 20px;
+}
+.product{
+    position: relative;
+    background-color: var(--sectionBack);
+    /* width: 300px;*/
+    height: 100%; 
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 20px 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: .3s;
+}
+.product:hover{
+    transform: scale(1.05);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+.action-button{
+    padding :0;
+    display: flex;
+    justify-content: space-between;
+
+}
+.image{
+    width:100%;
+    height: 60%;
+    display: grid;
+    place-content: center;
+}
+.image img{
+    width: 240px;
+    /* min-height: 200px; */
+    background-repeat: no-repeat;
+}
+.info{
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+.price{
+    display: grid;
+    grid-template-columns: 50px 50px ;
+    justify-content: center;
+    margin : 10px auto 10px;
+    
+}
+.price .discount-price{
+    font-size: 1.2rem;
+    color: var(--starColor);
+}
+.price .original-price{
+    color:var(--lightTextColor);
+    text-decoration: line-through;
+}
+
+.cart-button{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+.cart-button .addtocart{
+    font-size: 12px;
+    text-transform: capitalize;
+    transition: .5s;
+    background-color: var(--textColor);
+    color: var(--sectionBack);
+    margin-right: 20px;
+}
+.cart-button .addtocart:hover{
+    background-color: var(--textColor);
+}
+
+.cart-button .gotocart{
+    font-size: 12px;
+    text-transform: capitalize;
+    transition: .5s;
+    border-color: var(--textColor);
+    color: var(--textColor);
+    margin-right: 20px;
+}
+.cart-button .gotocart:hover{
+    border-color: var(--textColor);
+    color: var(--textColor);
+}
+
+.pagination-section{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.small-img{
+    display: flex;
+    justify-content: space-between;
+}
+.img-col{
+    flex-basis: 24%;
+}
+
+.cart-page{
+    margin: 40px;
+}
+
+.cart-page .header h1{
+    font-size: 2em;
+    color: var(--textColor);
+}
+
+.cart-page .header h1::after{
+    content:"";
+    position: absolute;
+    border-bottom: 5px solid var(--starColor);
+    width: 50px;
+    margin-top: 40px;
+    margin-left: -200px;
+
 }
