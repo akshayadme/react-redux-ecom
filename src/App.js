@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 function App() {
   const addProductDispatch = useDispatch();
   const navigate = useNavigate();
+
+  // calling function to fetch initial products list and storing it on redux store
   const fetchProductDetails = async () => {
     const response = await axios.get(BASEURL);
 

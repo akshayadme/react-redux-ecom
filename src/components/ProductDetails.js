@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Grid, Stack, Item, Button } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StarIcon from "@mui/icons-material/Star";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import { addToCart } from "../redux/action";
@@ -16,6 +15,7 @@ const ProductDetails = ({ product }) => {
 
   const addToCartDispatch = useDispatch();
 
+  // function to add to cart
   const handleAddToCart = () => {
     setCartAdded(true);
     addToCartDispatch(addToCart(product.product));

@@ -73,23 +73,3 @@ export function updateCartError() {
     type: UPDATE_ERROR,
   };
 }
-
-// export function handleMovieSearch(input) {
-//   console.log(input);
-//   const url = `http://www.omdbapi.com/?apikey=121631c1&t=${input}`;
-
-//   return async function (dispatch) {
-//     const response = await fetch(url);
-//     const product = await response.json();
-//     console.log(product);
-
-//     dispatch(addProductsSearchResult(product));
-//   };
-// }
-
-// export function addProductsSearchResult(product) {
-//   return {
-//     type: Add_SEARCH_RESULT,
-//     product,
-//   };
-// }

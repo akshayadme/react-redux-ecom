@@ -25,16 +25,20 @@ import { useSnackbar } from "notistack";
 
 export default function CartDetails() {
   const { enqueueSnackbar } = useSnackbar();
+
+  // getting store data
   const CartItem = useSelector((state) => state.cart);
   const CartError = useSelector((state) => state.cartError);
 
   const [cartItem, setCartItem] = useState(CartItem);
 
+  // disptch funmctions
   const incCountDispatch = useDispatch();
   const decCountDispatch = useDispatch();
   const deleteCartDispatch = useDispatch();
   const showErrorDispatch = useDispatch();
 
+  // function to display cart error
   const showError = () => {
     enqueueSnackbar("Maximum/Minimum cart limit reached!", {
       variant: "error",
@@ -51,14 +55,17 @@ export default function CartDetails() {
     }
   });
 
+  // function to increase count
   const handleIncCount = (data) => {
     incCountDispatch(incrementProductCount(data));
   };
 
+  // function to decrease count
   const handleDecCount = (data) => {
     decCountDispatch(decrementProductCount(data));
   };
 
+  // function to delete cart
   const handleDeleteCart = (data) => {
     deleteCartDispatch(removeFromCart(data));
   };

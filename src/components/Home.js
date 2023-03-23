@@ -20,7 +20,10 @@ import { addProducts, addToCart } from "../redux/action";
 import { useSnackbar } from "notistack";
 
 const Home = () => {
+  // getting store data
   const data = useSelector((state) => state.products);
+
+  // declare states
   const [productsData, setProductsData] = useState(data);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("default");
@@ -28,9 +31,11 @@ const Home = () => {
 
   const { enqueueSnackbar } = useSnackbar();
 
+  // dispatch function
   const addToCartDispatch = useDispatch();
   const addProductDispatch = useDispatch();
 
+  //  function to add to cart
   const handleAddToCart = (product) => {
     addToCartDispatch(addToCart(product));
 
@@ -59,6 +64,7 @@ const Home = () => {
     });
   };
 
+  // function to sort the products
   const handleSortChange = (e) => {
     const value = e.target.value;
     if (value === "default") {
@@ -84,6 +90,7 @@ const Home = () => {
     }
   };
 
+  // function to delete product
   const handleDeleteProduct = async (data) => {
     const response = await axios.delete(`${BASEURL}/${data.id}`);
 

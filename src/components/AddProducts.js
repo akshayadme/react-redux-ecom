@@ -12,9 +12,12 @@ const AddProducts = ({ productData }) => {
   const { enqueueSnackbar } = useSnackbar();
   const params = useLocation();
 
+  // getting store data
   const products = useSelector((state) => state.products);
   const addProductDispatch = useDispatch();
   const navigate = useNavigate();
+
+  // initialising state
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [discountPercentage, setDiscountPercentage] = useState("");
@@ -23,6 +26,7 @@ const AddProducts = ({ productData }) => {
   const [thumbnail, setThumbmail] = useState("");
   const [brand, setBrand] = useState("");
 
+  // function to add products
   const handleAddProduct = async (e) => {
     e.preventDefault();
     const data = {
@@ -57,6 +61,7 @@ const AddProducts = ({ productData }) => {
     setDiscountPercentage("");
   };
 
+  // function to edit products
   const handleEditProduct = async (e) => {
     e.preventDefault();
 
@@ -96,6 +101,7 @@ const AddProducts = ({ productData }) => {
     setDiscountPercentage("");
   };
 
+  // useEffect for setting innitial store data
   useEffect(() => {
     if (productData) {
       setTitle(productData.title);

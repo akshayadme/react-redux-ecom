@@ -8,6 +8,7 @@ const ProductCard = ({ data, handleAddToCart, handleDeleteProduct }) => {
   const navigate = useNavigate();
   const [cartAdded, setCartAdded] = useState(false);
 
+  // navigate to product details page
   const navigateToProductDetails = () => {
     navigate("product-details", {
       state: {
@@ -16,6 +17,7 @@ const ProductCard = ({ data, handleAddToCart, handleDeleteProduct }) => {
     });
   };
 
+  // navigate to edit product page
   const navigateToEdit = () => {
     navigate("/react-redux-ecom/edit-product", {
       state: {

@@ -9,6 +9,8 @@ import {
   UPDATE_ERROR,
 } from "../action";
 
+// initial product state
+
 const initialProductState = {
   products: [],
   cart: [],
@@ -16,6 +18,7 @@ const initialProductState = {
   cartError: false,
 };
 
+// reducer function to perform all product and cart related operation
 export default function handleEcomProducts(
   state = initialProductState,
   action
@@ -95,8 +98,6 @@ export default function handleEcomProducts(
           cartError: true,
         };
       } else {
-        console.log("inc");
-
         const products = state.cart.map((el) =>
           el.id === action.product.id
             ? {
@@ -124,8 +125,6 @@ export default function handleEcomProducts(
           cartError: true,
         };
       } else {
-        console.log("inc");
-
         const products = state.cart.map((el) =>
           el.id === action.product.id
             ? {

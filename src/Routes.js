@@ -7,6 +7,7 @@ import ProductDetails from "./components/ProductDetails";
 export default function Router() {
   const location = useLocation();
 
+  //  all routes of the app
   return useRoutes([
     { path: "/react-redux-ecom/", element: <Home /> },
     { path: "/react-redux-ecom/add-product", element: <AddProducts /> },
