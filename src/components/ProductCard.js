@@ -1,14 +1,36 @@
-import React from "react";
-import StarIcon from "@mui/icons-material/Star";
-import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
+import React, { useState } from "react";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Button, IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const ProductCard = ({ data }) => {
+const ProductCard = ({ data, handleAddToCart, handleDeleteProduct }) => {
+  const navigate = useNavigate();
+  const [cartAdded, setCartAdded] = useState(false);
+
+  const navigateToProductDetails = () => {
+    navigate("product-details", {
+      state: {
+        product: data,
+      },
+    });
+  };
+
+  const navigateToEdit = () => {
+    navigate("/edit-product", {
+      state: {
+        id: data.id,
+        price: data.price,
+        title: data.title,
+        category: data.category,
+        description: data.description,
+        thumbnail: data.thumbnail,
+        discountPercentage: data.discountPercentage,
+        brand: data.brand,
+      },
+    });
+  };
+
   return (
     <div className="product">
       <div className="action-button">
@@ -16,21 +38,21 @@ const ProductCard = ({ data }) => {
           color="primary"
           aria-label="upload picture"
           component="label"
+          onClick={navigateToEdit}
         >
-          <input hidden accept="image/*" type="file" />
           <ModeEditIcon />
         </IconButton>
         <IconButton
           color="primary"
           aria-label="upload picture"
           component="label"
+          onClick={() => handleDeleteProduct(data)}
         >
-          <input hidden accept="image/*" type="file" />
           <DeleteForeverIcon />
         </IconButton>
       </div>
       <div className="image">
-        <img src={data.images[0]} alt="" />
+        <img src={data.thumbnail} alt="" />
       </div>
       <div className="info">
         <div className="title">
@@ -48,17 +70,36 @@ const ProductCard = ({ data }) => {
       </div>
 
       <div className="cart-button">
-        <Button variant="contained" className="addtocart">
-          Add to Cart
-        </Button>
-        <Link
-          to="/product-details"
-          style={{ textDecoration: "none", color: "#fff" }}
-        >
-          <Button variant="outlined" className="gotocart">
-            View Details
+        {!cartAdded ? (
+          <Button
+            variant="contained"
+            className="addtocart"
+            onClick={() => {
+              handleAddToCart(data);
+              setCartAdded(true);
+            }}
+          >
+            Add to Cart
           </Button>
-        </Link>
+        ) : (
+          <Button
+            variant="outlined"
+            className="gotocart"
+            onClick={() => {
+              navigate("/cart-details");
+            }}
+          >
+            Go to Cart
+          </Button>
+        )}
+
+        <Button
+          variant="outlined"
+          className="gotocart"
+          onClick={navigateToProductDetails}
+        >
+          View Details
+        </Button>
       </div>
     </div>
   );

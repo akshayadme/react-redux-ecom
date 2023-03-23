@@ -2,7 +2,6 @@ import React from "react";
 import {
   Container,
   IconButton,
-  TextField,
   Typography,
   Paper,
   TableRow,
@@ -13,20 +12,57 @@ import {
   Table,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+import { useDispatch, useSelector } from "react-redux";
+import {
+  decrementProductCount,
+  incrementProductCount,
+  removeFromCart,
+  updateCartError,
+} from "../redux/action";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useSnackbar } from "notistack";
 
 export default function CartDetails() {
+  const { enqueueSnackbar } = useSnackbar();
+  const CartItem = useSelector((state) => state.cart);
+  const CartError = useSelector((state) => state.cartError);
+
+  const [cartItem, setCartItem] = useState(CartItem);
+
+  const incCountDispatch = useDispatch();
+  const decCountDispatch = useDispatch();
+  const deleteCartDispatch = useDispatch();
+  const showErrorDispatch = useDispatch();
+
+  const showError = () => {
+    enqueueSnackbar("Maximum/Minimum cart limit reached!", {
+      variant: "error",
+      autoHideDuration: 3000,
+      anchorOrigin: { vertical: "bottom", horizontal: "right" },
+    });
+
+    showErrorDispatch(updateCartError());
+  };
+
+  useEffect(() => {
+    if (CartError) {
+      showError();
+    }
+  });
+
+  const handleIncCount = (data) => {
+    incCountDispatch(incrementProductCount(data));
+  };
+
+  const handleDecCount = (data) => {
+    decCountDispatch(decrementProductCount(data));
+  };
+
+  const handleDeleteCart = (data) => {
+    deleteCartDispatch(removeFromCart(data));
+  };
+
   return (
     <Container fixed sx={{ mt: 10 }}>
       <div className="cart-page">
@@ -49,7 +85,7 @@ export default function CartDetails() {
                   Price
                 </Typography>
               </TableCell>
-              <TableCell align="center">
+              <TableCell align="left">
                 <Typography variant="h6" gutterBottom>
                   Quantity
                 </Typography>
@@ -67,28 +103,33 @@ export default function CartDetails() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {CartItem.map((row) => (
               <TableRow
-                key={row.name}
+                key={row.title}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {row.title}
                 </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
+                <TableCell align="right">{row.price}</TableCell>
                 <TableCell align="right">
-                  <TextField
-                    id="outlined-basic"
-                    label="Quantity"
-                    variant="outlined"
-                    type="number"
-                    size="small"
-                    defaultValue="1"
-                  />
+                  <div className="count-wrapper">
+                    <span className="minus" onClick={() => handleDecCount(row)}>
+                      -
+                    </span>
+                    <span className="num">{row.qty}</span>
+                    <span className="plus" onClick={() => handleIncCount(row)}>
+                      +
+                    </span>
+                  </div>
                 </TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
+                <TableCell align="right">{row.totalPrice}</TableCell>
                 <TableCell align="right">
-                  <IconButton aria-label="delete" color="error">
+                  <IconButton
+                    aria-label="delete"
+                    color="error"
+                    onClick={() => handleDeleteCart(row)}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>

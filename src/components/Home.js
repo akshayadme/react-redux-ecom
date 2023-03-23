@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   Pagination,
@@ -6,33 +7,50 @@ import {
   Select,
   MenuItem,
   Button,
+  Box,
+  CircularProgress,
 } from "@mui/material";
 import axios from "axios";
-import React from "react";
-import { useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { Link } from "react-router-dom";
-import products from "../products.json";
+import { useSelector, useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
-import { useState } from "react";
+import BASEURL from "../BASE_URL";
+import { addProducts, addToCart } from "../redux/action";
+import { useSnackbar } from "notistack";
 
 const Home = () => {
-  const [productsData, setProductsData] = useState(products.products);
+  const data = useSelector((state) => state.products);
+  const [productsData, setProductsData] = useState(data);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("default");
   const rowsPerPage = 10;
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const addToCartDispatch = useDispatch();
+  const addProductDispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    addToCartDispatch(addToCart(product));
+
+    enqueueSnackbar("Product Added to Cart!", {
+      variant: "success",
+      autoHideDuration: 3000,
+      anchorOrigin: { vertical: "bottom", horizontal: "right" },
+    });
+  };
 
   const handleChangePage = (event, value) => {
     setPage(value);
     goToTop();
   };
-  const fetchProductDetails = async () => {
-    const response = await axios.get(`https://fakestoreapi.com/products`);
-  };
 
   useEffect(() => {
-    // fetchProductDetails();
-  }, []);
+    if (data.length > 0) {
+      setProductsData(data);
+    }
+  });
 
   const goToTop = () => {
     window.scrollTo({
@@ -44,14 +62,14 @@ const Home = () => {
   const handleSortChange = (e) => {
     const value = e.target.value;
     if (value === "default") {
-      let data = products.products;
+      let data = productsData;
       data = data.sort((a, b) => a.id - b.id);
       setProductsData(data);
       setSort("default");
     }
 
     if (value === "ascending") {
-      let data = products.products;
+      let data = productsData;
 
       data = data.sort((a, b) => a.price - b.price);
       setProductsData(data);
@@ -59,12 +77,29 @@ const Home = () => {
     }
 
     if (value === "descending") {
-      let data = products.products;
+      let data = productsData;
 
       data = data.sort((a, b) => b.price - a.price);
       setSort("descending");
     }
   };
+
+  const handleDeleteProduct = async (data) => {
+    const response = await axios.delete(`${BASEURL}/${data.id}`);
+
+    if (response.status === 200) {
+      const filteredProducts = productsData.filter((el) => el.id !== data.id);
+
+      addProductDispatch(addProducts([...filteredProducts]));
+
+      enqueueSnackbar("Product Deleted Successfully!", {
+        variant: "success",
+        autoHideDuration: 3000,
+        anchorOrigin: { vertical: "bottom", horizontal: "right" },
+      });
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -101,16 +136,42 @@ const Home = () => {
           </Link>
         </div>
         <div className="products">
-          {productsData
-            .slice(
-              (page - 1) * rowsPerPage,
-              (page - 1) * rowsPerPage + rowsPerPage
-            )
-            .map((row, i) => (
-              <Grid item xs={4} key={i}>
-                <ProductCard data={row} />
-              </Grid>
-            ))}
+          {/* <Box
+            sx={{
+              display: "flex",
+              width: "80vw",
+              border: "1px solid",
+              justifyContent: "center",
+            }}
+          >
+            <CircularProgress color="inherit" />
+          </Box> */}
+          {productsData.length === 0 ? (
+            <Box
+              sx={{
+                display: "flex",
+                width: "80vw",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress color="inherit" />
+            </Box>
+          ) : (
+            productsData
+              .slice(
+                (page - 1) * rowsPerPage,
+                (page - 1) * rowsPerPage + rowsPerPage
+              )
+              .map((row, i) => (
+                <Grid item xs={4} key={i}>
+                  <ProductCard
+                    data={row}
+                    handleAddToCart={handleAddToCart}
+                    handleDeleteProduct={handleDeleteProduct}
+                  />
+                </Grid>
+              ))
+          )}
         </div>
 
         <div className="pagination-section">

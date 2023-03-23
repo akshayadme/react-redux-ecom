@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { AppBar, Badge, Grid, Toolbar, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const [cartCount, setCartCount] = useState(0);
+
+  const stateCartCount = useSelector((state) => state.cartCount);
+
+  const handleCartCount = () => {
+    setCartCount(stateCartCount);
+  };
+
+  useEffect(() => {
+    handleCartCount();
+  });
+
   return (
     <>
       <AppBar
@@ -21,8 +34,22 @@ const Navbar = () => {
               </Typography>
             </Grid>
             <Grid item xs={3}></Grid>
-            <Grid item xs={4}></Grid>
-            <Grid item xs={2}></Grid>
+            <Grid item xs={3} style={{ display: "flex" }}>
+              <Typography variant="body2" gutterBottom sx={{ ml: 5 }}>
+                <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
+                  Products
+                </Link>
+              </Typography>
+              <Typography variant="body2" gutterBottom sx={{ ml: 5 }}>
+                <Link
+                  to="/add-product"
+                  style={{ textDecoration: "none", color: "#fff" }}
+                >
+                  Add Products
+                </Link>
+              </Typography>
+            </Grid>
+            <Grid item xs={3}></Grid>
             <Grid item xs={1}>
               <div className="cart-wrapper">
                 <Link
@@ -30,7 +57,7 @@ const Navbar = () => {
                   style={{ textDecoration: "none", color: "#fff" }}
                 >
                   <Badge
-                    badgeContent={4}
+                    badgeContent={cartCount}
                     color="error"
                     style={{ cursor: "pointer" }}
                   >
