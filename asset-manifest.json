@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/akshayadme/react-redux-ecom/static/css/main.9f92dbac.css",
-    "main.js": "/akshayadme/react-redux-ecom/static/js/main.8e3e7f88.js",
-    "index.html": "/akshayadme/react-redux-ecom/index.html",
-    "main.9f92dbac.css.map": "/akshayadme/react-redux-ecom/static/css/main.9f92dbac.css.map",
-    "main.8e3e7f88.js.map": "/akshayadme/react-redux-ecom/static/js/main.8e3e7f88.js.map"
+    "main.css": "/react-redux-ecom/static/css/main.9f92dbac.css",
+    "main.js": "/react-redux-ecom/static/js/main.8e3e7f88.js",
+    "index.html": "/react-redux-ecom/index.html",
+    "main.9f92dbac.css.map": "/react-redux-ecom/static/css/main.9f92dbac.css.map",
+    "main.8e3e7f88.js.map": "/react-redux-ecom/static/js/main.8e3e7f88.js.map"
   },
   "entrypoints": [
     "static/css/main.9f92dbac.css",
