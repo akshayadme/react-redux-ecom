@@ -1,12 +1,8 @@
 {
+  "homepage": "https://github.com/akshayadme/react-redux-ecom",
   "name": "cn-react-ecom-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/akshayadme/react-redux-ecom",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/akshayadme/react-redux-ecom.git"
-  },
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
