@@ -8,16 +8,16 @@ export default function Router() {
   const location = useLocation();
 
   return useRoutes([
-    { path: "/", element: <Home /> },
-    { path: "/add-product", element: <AddProducts /> },
+    { path: "/react-redux-ecom/", element: <Home /> },
+    { path: "/react-redux-ecom/add-product", element: <AddProducts /> },
     {
-      path: "/edit-product",
+      path: "/react-redux-ecom/edit-product",
       element: <AddProducts productData={location.state} />,
     },
     {
-      path: "/product-details",
+      path: "/react-redux-ecom/product-details",
       element: <ProductDetails product={location.state} />,
     },
-    { path: "/cart-details", element: <CartPage /> },
+    { path: "/react-redux-ecom/cart-details", element: <CartPage /> },
   ]);
 }

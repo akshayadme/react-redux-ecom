@@ -7,9 +7,11 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import { addToCart } from "../redux/action";
 import { useDispatch } from "react-redux";
 import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
 const ProductDetails = ({ product }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
   const [cartAdded, setCartAdded] = useState(false);
 
   const addToCartDispatch = useDispatch();
@@ -74,7 +76,11 @@ const ProductDetails = ({ product }) => {
               {cartAdded ? "Product Added" : "Add to Cart"}
             </Button>
 
-            <Button variant="outlined" className="gotocart">
+            <Button
+              variant="outlined"
+              className="gotocart"
+              onClick={() => navigate("/react-redux-ecom/cart-details")}
+            >
               Go to Cart
             </Button>
           </div>

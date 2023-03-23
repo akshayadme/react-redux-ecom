@@ -17,7 +17,7 @@ const ProductCard = ({ data, handleAddToCart, handleDeleteProduct }) => {
   };
 
   const navigateToEdit = () => {
-    navigate("/edit-product", {
+    navigate("/react-redux-ecom/edit-product", {
       state: {
         id: data.id,
         price: data.price,
@@ -86,7 +86,7 @@ const ProductCard = ({ data, handleAddToCart, handleDeleteProduct }) => {
             variant="outlined"
             className="gotocart"
             onClick={() => {
-              navigate("/cart-details");
+              navigate("/react-redux-ecom/cart-details");
             }}
           >
             Go to Cart

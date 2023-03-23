@@ -6,17 +6,18 @@ import Router from "./Routes";
 import axios from "axios";
 import { addProducts } from "./redux/action";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const addProductDispatch = useDispatch();
-
+  const navigate = useNavigate();
   const fetchProductDetails = async () => {
     const response = await axios.get(BASEURL);
 
     if (response.status === 200) {
-      // setProductsData(response.data);
-      localStorage.setItem("products", JSON.stringify(response.data));
       addProductDispatch(addProducts(response.data));
+
+      navigate("/react-redux-ecom/");
     }
   };
 

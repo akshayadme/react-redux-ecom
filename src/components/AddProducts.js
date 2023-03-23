@@ -40,7 +40,7 @@ const AddProducts = ({ productData }) => {
 
     if (response.status === 201) {
       addProductDispatch(addProducts([...products, data]));
-      navigate("/");
+      navigate("/react-redux-ecom/");
     }
 
     enqueueSnackbar("Product Added Successfully!", {
@@ -60,7 +60,6 @@ const AddProducts = ({ productData }) => {
   const handleEditProduct = async (e) => {
     e.preventDefault();
 
-    console.log("first");
     const data = {
       id: productData.id,
       title,
@@ -80,7 +79,7 @@ const AddProducts = ({ productData }) => {
       );
 
       addProductDispatch(addProducts([...filteredProducts, data]));
-      navigate("/");
+      navigate("/react-redux-ecom/");
     }
 
     enqueueSnackbar("Product Updated Successfully!", {
@@ -118,7 +117,7 @@ const AddProducts = ({ productData }) => {
       </div>
       <form
         onSubmit={(e) => {
-          params.pathname === "/edit-product"
+          params.pathname === "/react-redux-ecom/edit-product"
             ? handleEditProduct(e)
             : handleAddProduct(e);
         }}
@@ -210,16 +209,7 @@ const AddProducts = ({ productData }) => {
           sx={{ mt: 2 }}
           className="cart-button"
         >
-          <Button
-            variant="contained"
-            className="addtocart"
-            // onClick={(e) => {
-            //   params.pathname === "edit-product"
-            //     ? handleEditProduct(e)
-            //     : handleAddProduct(e);
-            // }}
-            type="submit"
-          >
+          <Button variant="contained" className="addtocart" type="submit">
             Submit
           </Button>
           <Button variant="outlined" className="gotocart">

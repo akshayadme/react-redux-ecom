@@ -136,16 +136,6 @@ const Home = () => {
           </Link>
         </div>
         <div className="products">
-          {/* <Box
-            sx={{
-              display: "flex",
-              width: "80vw",
-              border: "1px solid",
-              justifyContent: "center",
-            }}
-          >
-            <CircularProgress color="inherit" />
-          </Box> */}
           {productsData.length === 0 ? (
             <Box
               sx={{

@@ -28,7 +28,10 @@ const Navbar = () => {
           <Grid container sx={{ placeItems: "center" }}>
             <Grid item xs={2}>
               <Typography variant="h6" gutterBottom sx={{ ml: 5 }}>
-                <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
+                <Link
+                  to="/react-redux-ecom/"
+                  style={{ textDecoration: "none", color: "#fff" }}
+                >
                   E-Cart
                 </Link>
               </Typography>
@@ -36,13 +39,16 @@ const Navbar = () => {
             <Grid item xs={3}></Grid>
             <Grid item xs={3} style={{ display: "flex" }}>
               <Typography variant="body2" gutterBottom sx={{ ml: 5 }}>
-                <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
+                <Link
+                  to="/react-redux-ecom/"
+                  style={{ textDecoration: "none", color: "#fff" }}
+                >
                   Products
                 </Link>
               </Typography>
               <Typography variant="body2" gutterBottom sx={{ ml: 5 }}>
                 <Link
-                  to="/add-product"
+                  to="/react-redux-ecom/add-product"
                   style={{ textDecoration: "none", color: "#fff" }}
                 >
                   Add Products
@@ -53,7 +59,7 @@ const Navbar = () => {
             <Grid item xs={1}>
               <div className="cart-wrapper">
                 <Link
-                  to="/cart-details"
+                  to="/react-redux-ecom/cart-details"
                   style={{ textDecoration: "none", color: "#fff" }}
                 >
                   <Badge
